@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Look in asciidoctor.gemspec for runtime and development dependencies
 gemspec

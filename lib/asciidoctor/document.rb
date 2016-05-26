@@ -1079,24 +1079,26 @@ class Document < AbstractBlock
     end
   end
 
-=begin
-  def convert_to target, opts = {}
-    start = ::Time.now.to_f if (monitor = opts[:monitor])
-    output = (r = converter opts).convert
-    monitor[:convert] = ::Time.now.to_f - start if monitor
+# =begin
+#   def convert_to target, opts = {}
+#     start = ::Time.now.to_f if (monitor = opts[:monitor])
+#     output = (r = converter opts).convert
+#     monitor[:convert] = ::Time.now.to_f - start if monitor
+#
+#     unless target.respond_to? :write
+#       @attributes['outfile'] = target = ::File.expand_path target
+#       @attributes['outdir'] = ::File.dirname target
+#     end
+#
+#     start = ::Time.now.to_f if monitor
+#     r.write output, target
+#     monitor[:write] = ::Time.now.to_f - start if monitor
+#
+#     output
+#   end
+# =end
 
-    unless target.respond_to? :write
-      @attributes['outfile'] = target = ::File.expand_path target
-      @attributes['outdir'] = ::File.dirname target
-    end
 
-    start = ::Time.now.to_f if monitor
-    r.write output, target
-    monitor[:write] = ::Time.now.to_f - start if monitor
-
-    output
-  end
-=end
 
   def content
     # NOTE per AsciiDoc-spec, remove the title before converting the body

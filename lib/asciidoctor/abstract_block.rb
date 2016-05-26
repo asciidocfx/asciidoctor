@@ -214,35 +214,35 @@ class AbstractBlock < AbstractNode
   end
 
 # stage the Enumerable mixin until we're sure we've got it right
-=begin
-  include ::Enumerable
-
-  # Public: Yield the block on this block node and all its descendant
-  # block node children to satisfy the Enumerable contract.
-  #
-  # Returns nothing
-  def each &block
-    # yucky, dlist is a special case
-    if @context == :dlist
-      @blocks.flatten.each &block
-    else
-      #yield self.header if @context == :document && header?
-      @blocks.each &block
-    end
-  end
-
-  #--
-  # TODO is there a way to make this lazy?
-  def each_recursive &block
-    block = lambda {|node| node } unless block_given?
-    results = []
-    self.each do |node|
-      results << block.call(node)
-      results.concat(node.each_recursive(&block)) if ::Enumerable === node
-    end
-    block_given? ? results : results.to_enum
-  end
-=end
+# =begin
+#   include ::Enumerable
+#
+#   # Public: Yield the block on this block node and all its descendant
+#   # block node children to satisfy the Enumerable contract.
+#   #
+#   # Returns nothing
+#   def each &block
+#     # yucky, dlist is a special case
+#     if @context == :dlist
+#       @blocks.flatten.each &block
+#     else
+#       #yield self.header if @context == :document && header?
+#       @blocks.each &block
+#     end
+#   end
+#
+#   #--
+#   # TODO is there a way to make this lazy?
+#   def each_recursive &block
+#     block = lambda {|node| node } unless block_given?
+#     results = []
+#     self.each do |node|
+#       results << block.call(node)
+#       results.concat(node.each_recursive(&block)) if ::Enumerable === node
+#     end
+#     block_given? ? results : results.to_enum
+#   end
+# =end
 
   # Public: Query for all descendant block nodes in the document tree that
   # match the specified Symbol filter_context and, optionally, the style and/or

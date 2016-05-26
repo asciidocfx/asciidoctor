@@ -1514,31 +1514,31 @@ attached paragraph
     end
 
     # NOTE this is not consistent w/ AsciiDoc output, but this is some screwy input anyway
-=begin
-    test "consecutive list continuation lines are folded" do
-      input = <<-EOS
-Lists
-=====
-
-* Item one, paragraph one
-+
-+
-Item one, paragraph two
-+
-+
-* Item two
-+
-+
-      EOS
-      output = render_string input
-      assert_xpath '//ul', output, 1
-      assert_xpath '//ul/li', output, 2
-      assert_xpath '//ul/li[1]/p', output, 1
-      assert_xpath '//ul/li[1]//p', output, 2
-      assert_xpath '//ul/li[1]//p[text() = "Item one, paragraph one"]', output, 1
-      assert_xpath '//ul/li[1]//p[text() = "Item one, paragraph two"]', output, 1
-    end
-=end
+# =begin
+#     test "consecutive list continuation lines are folded" do
+#       input = <<-EOS
+# Lists
+# =====
+#
+# * Item one, paragraph one
+# +
+# +
+# Item one, paragraph two
+# +
+# +
+# * Item two
+# +
+# +
+#       EOS
+#       output = render_string input
+#       assert_xpath '//ul', output, 1
+#       assert_xpath '//ul/li', output, 2
+#       assert_xpath '//ul/li[1]/p', output, 1
+#       assert_xpath '//ul/li[1]//p', output, 2
+#       assert_xpath '//ul/li[1]//p[text() = "Item one, paragraph one"]', output, 1
+#       assert_xpath '//ul/li[1]//p[text() = "Item one, paragraph two"]', output, 1
+#     end
+# =end
 
   end
 end
@@ -3342,22 +3342,22 @@ not a term::: def
     end
 
     # FIXME pending
-=begin
-    test 'attached paragraph does not break on adjacent sibling labeled list term' do
-      input = <<-EOS
-term1:: def
-+
-more description
-not a term:: def
-      EOS
-
-      output = render_embedded_string input
-      assert_css '.dlist > dl > dt', output, 1
-      assert_css '.dlist > dl > dd', output, 1
-      assert_css '.dlist > dl > dd > .paragraph', output, 1
-      assert output.include?('not a term:: def')
-    end
-=end
+# =begin
+#     test 'attached paragraph does not break on adjacent sibling labeled list term' do
+#       input = <<-EOS
+# term1:: def
+# +
+# more description
+# not a term:: def
+#       EOS
+#
+#       output = render_embedded_string input
+#       assert_css '.dlist > dl > dt', output, 1
+#       assert_css '.dlist > dl > dd', output, 1
+#       assert_css '.dlist > dl > dd > .paragraph', output, 1
+#       assert output.include?('not a term:: def')
+#     end
+# =end
 
     test 'attached styled paragraph does not break on adjacent nested labeled list term' do
       input = <<-EOS

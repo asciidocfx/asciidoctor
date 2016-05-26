@@ -315,21 +315,7 @@ class AbstractNode
   #
   # Returns A String reference or data URI for the target image
   def image_uri(target_image, asset_dir_key = 'imagesdir')
-    if (doc = @document).safe < SafeMode::SECURE && doc.attr?('data-uri')
-      if (Helpers.uriish? target_image) ||
-          (asset_dir_key && (images_base = doc.attr(asset_dir_key)) && (Helpers.uriish? images_base) &&
-          (target_image = normalize_web_path(target_image, images_base, false)))
-        if doc.attr?('allow-uri-read')
-          generate_data_uri_from_uri target_image, doc.attr?('cache-uri')
-        else
-          target_image
-        end
-      else
-        generate_data_uri target_image, asset_dir_key
-      end
-    else
-      normalize_web_path target_image, (asset_dir_key ? doc.attr(asset_dir_key) : nil)
-    end
+    normalize_web_path target_image, (asset_dir_key ? @document.attr(asset_dir_key) : nil)
   end
 
   # Public: Generate a data URI that can be used to embed an image in the output document

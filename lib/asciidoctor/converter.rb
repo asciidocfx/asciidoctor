@@ -151,15 +151,15 @@ module Asciidoctor
       setup_backend_info
     end
 
-=begin
-    # Public: Invoked when this converter is added to the chain of converters in a {CompositeConverter}.
-    #
-    # owner - The CompositeConverter instance
-    #
-    # Returns nothing
-    def composed owner
-    end
-=end
+# =begin
+#     # Public: Invoked when this converter is added to the chain of converters in a {CompositeConverter}.
+#     #
+#     # owner - The CompositeConverter instance
+#     #
+#     # Returns nothing
+#     def composed owner
+#     end
+# =end
 
     # Public: Converts an {AbstractNode} using the specified transform along
     # with additional options. If a transform is not specified, implementations

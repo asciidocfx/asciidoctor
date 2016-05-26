@@ -1,37 +1,37 @@
 #!/usr/bin/env ruby
 
-=begin
-
-Use this script to monitor changes in performance when making code changes to Asciidoctor.
-
- $ ruby benchmark.rb <benchmark-name> <repeat>
-
-The most common benchmark is the userguide-loop.
-It will download the AsciiDoc User Guide automatically the first time, then convert it in memory.
-Running it 10 times provides a good picture.
-
- $ ruby benchmark.rb userguide-loop 10
-
-Only worry about the relative change to the numbers before and after the code change.
-Absolute times are highly dependent on the capabilities of the machine the the version of Ruby.
-
-To get the best results under MRI, tune Ruby using environment variables as follows:
-
-.Ruby < 2.1
- $ RUBY_GC_MALLOC_LIMIT=90000000 RUBY_FREE_MIN=650000 ruby benchmark.rb userguide-loop 10
-
-.Ruby >= 2.1
- $ RUBY_GC_MALLOC_LIMIT=128000000 RUBY_GC_OLDMALLOC_LIMIT=128000000 RUBY_GC_HEAP_INIT_SLOTS=800000 RUBY_GC_HEAP_FREE_SLOTS=800000 RUBY_GC_HEAP_GROWTH_MAX_SLOTS=250000 RUBY_GC_HEAP_GROWTH_FACTOR=2 ruby benchmark.rb userguide-loop 10
-
-Asciidoctor starts with ~ 12,500 objects, adds ~ 300,000 each run, so tune RUBY_GC_HEAP_* accordingly
-
-See http://globaldev.co.uk/2014/05/ruby-2-1-in-detail/#gc-tuning-environment-variables
-
-Execute Ruby using the `--disable=gems` flag to speed up the initial load time, as shown below:
-
- $ ruby --disable=gems ...
-
-=end
+# =begin
+#
+# Use this script to monitor changes in performance when making code changes to Asciidoctor.
+#
+#  $ ruby benchmark.rb <benchmark-name> <repeat>
+#
+# The most common benchmark is the userguide-loop.
+# It will download the AsciiDoc User Guide automatically the first time, then convert it in memory.
+# Running it 10 times provides a good picture.
+#
+#  $ ruby benchmark.rb userguide-loop 10
+#
+# Only worry about the relative change to the numbers before and after the code change.
+# Absolute times are highly dependent on the capabilities of the machine the the version of Ruby.
+#
+# To get the best results under MRI, tune Ruby using environment variables as follows:
+#
+# .Ruby < 2.1
+#  $ RUBY_GC_MALLOC_LIMIT=90000000 RUBY_FREE_MIN=650000 ruby benchmark.rb userguide-loop 10
+#
+# .Ruby >= 2.1
+#  $ RUBY_GC_MALLOC_LIMIT=128000000 RUBY_GC_OLDMALLOC_LIMIT=128000000 RUBY_GC_HEAP_INIT_SLOTS=800000 RUBY_GC_HEAP_FREE_SLOTS=800000 RUBY_GC_HEAP_GROWTH_MAX_SLOTS=250000 RUBY_GC_HEAP_GROWTH_FACTOR=2 ruby benchmark.rb userguide-loop 10
+#
+# Asciidoctor starts with ~ 12,500 objects, adds ~ 300,000 each run, so tune RUBY_GC_HEAP_* accordingly
+#
+# See http://globaldev.co.uk/2014/05/ruby-2-1-in-detail/#gc-tuning-environment-variables
+#
+# Execute Ruby using the `--disable=gems` flag to speed up the initial load time, as shown below:
+#
+#  $ ruby --disable=gems ...
+#
+# =end
 
 require 'benchmark'
 include Benchmark
@@ -55,18 +55,18 @@ end
 
 case bench
 
-=begin
-# benchmark template
-
-when 'name'
-
-  sample = 'value'
-
-  Benchmark.bmbm(12) {|bm|
-    bm.report('operation a') { $repeat.times { call_a_on sample } }
-    bm.report('operation b') { $repeat.times { call_b_on sample } }
-  }
-=end
+# =begin
+# # benchmark template
+#
+# when 'name'
+#
+#   sample = 'value'
+#
+#   Benchmark.bmbm(12) {|bm|
+#     bm.report('operation a') { $repeat.times { call_a_on sample } }
+#     bm.report('operation b') { $repeat.times { call_b_on sample } }
+#   }
+# =end
 
 when 'userguide'
   require '../lib/asciidoctor.rb'

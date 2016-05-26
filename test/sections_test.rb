@@ -1489,78 +1489,78 @@ Terms
     end
 
     # reenable once we have :specialnumbered!: implemented
-=begin
-    test 'should not number special sections or subsections' do
-      input = <<-EOS
-:numbered:
-:specialnumbered!:
-
-== Section One
-
-[appendix]
-== Attribute Options
-
-Details
-
-[appendix]
-== Migration
-
-Details
-
-=== Gotchas
-
-Details
-
-[glossary]
-== Glossary
-
-Terms
-      EOS
-
-      output = render_embedded_string input
-      assert_xpath '(//h2)[1][text()="1. Section One"]', output, 1
-      assert_xpath '(//h2)[2][text()="Appendix A: Attribute Options"]', output, 1
-      assert_xpath '(//h2)[3][text()="Appendix B: Migration"]', output, 1
-      assert_xpath '(//h3)[1][text()="Gotchas"]', output, 1
-      assert_xpath '(//h2)[4][text()="Glossary"]', output, 1
-    end
-
-    test 'should not number special sections or subsections in toc' do
-      input = <<-EOS
-:numbered:
-:specialnumbered!:
-:toc:
-
-== Section One
-
-[appendix]
-== Attribute Options
-
-Details
-
-[appendix]
-== Migration
-
-Details
-
-=== Gotchas
-
-Details
-
-[glossary]
-== Glossary
-
-Terms
-      EOS
-
-      output = render_string input
-      assert_xpath '//*[@id="toc"]/ul//li/a[text()="1. Section One"]', output, 1
-      assert_xpath '//*[@id="toc"]/ul//li/a[text()="Appendix A: Attribute Options"]', output, 1
-      assert_xpath '//*[@id="toc"]/ul//li/a[text()="Appendix B: Migration"]', output, 1
-      assert_xpath '//*[@id="toc"]/ul//li/a[text()="Gotchas"]', output, 1
-      assert_xpath '//*[@id="toc"]/ul//li/a[text()="Glossary"]', output, 1
-    end
-=end
+# =begin
+#     test 'should not number special sections or subsections' do
+#       input = <<-EOS
+# :numbered:
+# :specialnumbered!:
+#
+# == Section One
+#
+# [appendix]
+# == Attribute Options
+#
+# Details
+#
+# [appendix]
+# == Migration
+#
+# Details
+#
+# === Gotchas
+#
+# Details
+#
+# [glossary]
+# == Glossary
+#
+# Terms
+#       EOS
+#
+#       output = render_embedded_string input
+#       assert_xpath '(//h2)[1][text()="1. Section One"]', output, 1
+#       assert_xpath '(//h2)[2][text()="Appendix A: Attribute Options"]', output, 1
+#       assert_xpath '(//h2)[3][text()="Appendix B: Migration"]', output, 1
+#       assert_xpath '(//h3)[1][text()="Gotchas"]', output, 1
+#       assert_xpath '(//h2)[4][text()="Glossary"]', output, 1
+#     end
+#
+#     test 'should not number special sections or subsections in toc' do
+#       input = <<-EOS
+# :numbered:
+# :specialnumbered!:
+# :toc:
+#
+# == Section One
+#
+# [appendix]
+# == Attribute Options
+#
+# Details
+#
+# [appendix]
+# == Migration
+#
+# Details
+#
+# === Gotchas
+#
+# Details
+#
+# [glossary]
+# == Glossary
+#
+# Terms
+#       EOS
+#
+#       output = render_string input
+#       assert_xpath '//*[@id="toc"]/ul//li/a[text()="1. Section One"]', output, 1
+#       assert_xpath '//*[@id="toc"]/ul//li/a[text()="Appendix A: Attribute Options"]', output, 1
+#       assert_xpath '//*[@id="toc"]/ul//li/a[text()="Appendix B: Migration"]', output, 1
+#       assert_xpath '//*[@id="toc"]/ul//li/a[text()="Gotchas"]', output, 1
+#       assert_xpath '//*[@id="toc"]/ul//li/a[text()="Glossary"]', output, 1
+#     end
+# =end
 
     test 'level 0 special sections in multipart book should be rendered as level 1' do
       input = <<-EOS

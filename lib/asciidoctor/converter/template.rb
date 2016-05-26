@@ -84,12 +84,12 @@ module Asciidoctor
       #create_handlers
     end
 
-=begin
-    # Public: Called when this converter is added to a composite converter.
-    def composed parent
-      # TODO set the backend info determined during the scan
-    end
-=end
+# =begin
+#     # Public: Called when this converter is added to a composite converter.
+#     def composed parent
+#       # TODO set the backend info determined during the scan
+#     end
+# =end
 
     # Internal: Scans the template directories specified in the constructor for Tilt-supported
     # templates, loads the templates and stores the in a Hash that is accessible via the
@@ -136,33 +136,33 @@ module Asciidoctor
       end
     end
 
-=begin
-    # Internal: Creates convert methods (e.g., inline_anchor) that delegate to the discovered templates.
-    #
-    # Returns nothing
-    def create_handlers
-      @templates.each do |name, template|
-        create_handler name, template
-      end
-      nil
-    end
-
-    # Internal: Creates a convert method for the specified name that delegates to the specified template.
-    #
-    # Returns nothing
-    def create_handler name, template
-      metaclass = class << self; self; end
-      if name == 'document'
-        metaclass.send :define_method, name do |node|
-          (template.render node).strip
-        end
-      else
-        metaclass.send :define_method, name do |node|
-          (template.render node).chomp
-        end
-      end
-    end
-=end
+# =begin
+#     # Internal: Creates convert methods (e.g., inline_anchor) that delegate to the discovered templates.
+#     #
+#     # Returns nothing
+#     def create_handlers
+#       @templates.each do |name, template|
+#         create_handler name, template
+#       end
+#       nil
+#     end
+#
+#     # Internal: Creates a convert method for the specified name that delegates to the specified template.
+#     #
+#     # Returns nothing
+#     def create_handler name, template
+#       metaclass = class << self; self; end
+#       if name == 'document'
+#         metaclass.send :define_method, name do |node|
+#           (template.render node).strip
+#         end
+#       else
+#         metaclass.send :define_method, name do |node|
+#           (template.render node).chomp
+#         end
+#       end
+#     end
+# =end
 
     # Public: Convert an {AbstractNode} to the backend format using the named template.
     #

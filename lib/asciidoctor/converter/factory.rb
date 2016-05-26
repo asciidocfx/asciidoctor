@@ -212,6 +212,36 @@ module Asciidoctor
             require 'asciidoctor/converter/manpage'.to_s
           end
           ManPageConverter.new backend, opts
+        when 'bespokejs'
+          unless defined? ::Asciidoctor::Converter::BespokejsConverter
+            require 'asciidoctor/converter/bespokejs'.to_s
+          end
+          BespokejsConverter.new backend, opts
+        when 'deckjs'
+          unless defined? ::Asciidoctor::Converter::DeckjsConverter
+            require 'asciidoctor/converter/deckjs'.to_s
+          end
+          DeckjsConverter.new backend, opts
+        when 'odf'
+          unless defined? ::Asciidoctor::Converter::OdfConverter
+            require 'asciidoctor/converter/odf'.to_s
+          end
+          OdfConverter.new backend, opts
+        when 'oreilly'
+          unless defined? ::Asciidoctor::Converter::OreillyConverter
+            require 'asciidoctor/converter/oreilly'.to_s
+          end
+          OreillyConverter.new backend, opts
+        when 'packt'
+          unless defined? ::Asciidoctor::Converter::PacktConverter
+            require 'asciidoctor/converter/packt'.to_s
+          end
+          PacktConverter.new backend, opts
+        when 'revealjs'
+          unless defined? ::Asciidoctor::Converter::RevealjsConverter
+            require 'asciidoctor/converter/revealjs'.to_s
+          end
+          RevealjsConverter.new backend, opts
         end
 
         return base_converter unless opts.key? :template_dirs
