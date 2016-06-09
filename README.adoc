@@ -53,6 +53,13 @@ Asciidoctor is written in Ruby, packaged as a RubyGem and published to {uri-ruby
 The gem is also included in several Linux distributions, including Fedora, Debian and Ubuntu.
 Asciidoctor is open source, {uri-repo}[hosted on GitHub] and released under {uri-license}[the MIT license].
 
+ifndef::env-site[]
+.Translations of the document are available in the following languages:
+* {uri-rel-file-base}README-zh_CN.adoc[汉语]
+* {uri-rel-file-base}README-fr.adoc[Français]
+* {uri-rel-file-base}README-jp.adoc[日本語]
+endif::[]
+
 .Key documentation
 [.compact]
 * {uri-docs}/what-is-asciidoc[What is Asciidoc?]
@@ -73,8 +80,8 @@ Asciidoctor.js is used to power the AsciiDoc preview extensions for Chrome, Atom
 
 ifdef::status[]
 .*Project health*
-image:https://img.shields.io/travis/asciidoctor/asciidoctor/master.svg[Build Status (Travis CI), link=https://travis-ci.org/asciidoctor/asciidoctor] 
-image:https://ci.appveyor.com/api/projects/status/ifplu67oxvgn6ceq/branch/master?svg=true&amp;passingText=green%20bar&amp;failingText=%23fail&amp;pendingText=building%2E%2E%2E[Build Status (AppVeyor), link=https://ci.appveyor.com/project/asciidoctor/asciidoctor] 
+image:https://img.shields.io/travis/asciidoctor/asciidoctor/master.svg[Build Status (Travis CI), link=https://travis-ci.org/asciidoctor/asciidoctor]
+image:https://ci.appveyor.com/api/projects/status/ifplu67oxvgn6ceq/branch/master?svg=true&amp;passingText=green%20bar&amp;failingText=%23fail&amp;pendingText=building%2E%2E%2E[Build Status (AppVeyor), link=https://ci.appveyor.com/project/asciidoctor/asciidoctor]
 //image:https://img.shields.io/coveralls/asciidoctor/asciidoctor/master.svg[Coverage Status, link=https://coveralls.io/r/asciidoctor/asciidoctor]
 image:https://codeclimate.com/github/asciidoctor/asciidoctor/badges/gpa.svg[Code Climate, link="https://codeclimate.com/github/asciidoctor/asciidoctor"]
 image:https://inch-ci.org/github/asciidoctor/asciidoctor.svg?branch=master[Inline docs, link="https://inch-ci.org/github/asciidoctor/asciidoctor"]
@@ -108,7 +115,7 @@ Asciidoctor works on Linux, OS X (Mac) and Windows and requires one of the follo
 * Opal (JavaScript)
 
 We welcome your help testing Asciidoctor on these and other platforms.
-Refer to <<{idprefix}contributing,Contributing>> to learn how to get involved.
+Refer to the <<Contributing>> section to learn how to get involved.
 
 [CAUTION]
 ====
@@ -118,6 +125,7 @@ To solve this issue, we recommend changing the active code page in your console 
  chcp 65001
 
 Once you make this change, all your Unicode headaches will be behind you.
+If you're using an IDE like Eclipse, make sure you set the encoding to UTF-8 there as well.
 Asciidoctor works best when you use UTF-8 everywhere.
 ====
 
@@ -185,7 +193,7 @@ To upgrade the gem, use:
 
  $ sudo dnf update -y asciidoctor
 
-TIP: Your Fedora system may be configured to automatically update packages, in which case no action is required by you to update the gem.
+TIP: Your system may be configured to automatically update rpm packages, in which case no action is required by you to update the gem.
 
 ==== apt-get (Debian, Ubuntu, Mint)
 
@@ -227,7 +235,7 @@ To upgrade the gem, use:
 
  $ sudo apk add -u asciidoctor
 
-TIP: Your Alpine Linux system may be configured to automatically update packages, in which case no action is required by you to update the gem.
+TIP: Your system may be configured to automatically update apk packages, in which case no action is required by you to update the gem.
 
 === Other installation options
 

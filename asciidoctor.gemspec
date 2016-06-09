@@ -11,11 +11,12 @@ Gem::Specification.new do |s|
   s.homepage = 'http://asciidoctor.org'
   s.license = 'MIT'
 
-  s.files = begin
-    `git ls-files -z`.split "\0"
+  files = begin
+    IO.popen('git ls-files -z') {|io| io.read }.split "\0"
   rescue
     Dir['**/*']
-  end.grep(/^(?:(?:bin|data|features|lib|man|test)\/.+|Rakefile|(?:CHANGELOG|CONTRIBUTING|LICENSE|README)\.adoc)$/)
+  end
+  s.files = files.grep(/^(?:(?:bin|data|features|lib|man|test)\/.+|Rakefile|(?:CHANGELOG|CONTRIBUTING|LICENSE|README)\.adoc)$/)
 
   s.executables = s.files.grep(/^bin\//).map {|f| File.basename f }
   s.test_files = s.files.grep(/^(?:test\/.*_test\.rb|features\/.*\.(?:feature|rb))$/)
