@@ -299,27 +299,27 @@ module Substitutors
     } if (text.include? pass_inline_char1) || (pass_inline_char2 && (text.include? pass_inline_char2))
 
     # NOTE we need to do the stem in a subsequent step to allow it to be escaped by the former
-    text = text.gsub(StemInlineMacroRx) {
-      # alias match for Ruby 1.8.7 compat
-      m = $~
-      # honor the escape
-      if m[0].start_with? '\\'
-        next m[0][1..-1]
-      end
-
-      if (type = m[1].to_sym) == :stem
-        type = ((default_stem_type = document.attributes['stem']).nil_or_empty? ? 'asciimath' : default_stem_type).to_sym
-      end
-      content = unescape_brackets m[3]
-      if m[2].nil_or_empty?
-        subs = (@document.basebackend? 'html') ? [:specialcharacters] : []
-      else
-        subs = resolve_pass_subs m[2]
-      end
-
-      @passthroughs[pass_key = @passthroughs.size] = {:text => content, :subs => subs, :type => type}
-      %(#{PASS_START}#{pass_key}#{PASS_END})
-    } if (text.include? ':') && ((text.include? 'stem:') || (text.include? 'math:'))
+    # text = text.gsub(StemInlineMacroRx) {
+    #   # alias match for Ruby 1.8.7 compat
+    #   m = $~
+    #   # honor the escape
+    #   if m[0].start_with? '\\'
+    #     next m[0][1..-1]
+    #   end
+    #
+    #   if (type = m[1].to_sym) == :stem
+    #     type = ((default_stem_type = document.attributes['stem']).nil_or_empty? ? 'asciimath' : default_stem_type).to_sym
+    #   end
+    #   content = unescape_brackets m[3]
+    #   if m[2].nil_or_empty?
+    #     subs = (@document.basebackend? 'html') ? [:specialcharacters] : []
+    #   else
+    #     subs = resolve_pass_subs m[2]
+    #   end
+    #
+    #   @passthroughs[pass_key = @passthroughs.size] = {:text => content, :subs => subs, :type => type}
+    #   %(#{PASS_START}#{pass_key}#{PASS_END})
+    # } if (text.include? ':') && ((text.include? 'stem:') || (text.include? 'math:'))
 
     text
   end

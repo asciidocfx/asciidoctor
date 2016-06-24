@@ -254,37 +254,37 @@ module Asciidoctor
       end
     end
 
-    def stem node
-      if (idx = node.subs.index :specialcharacters)
-        node.subs.delete :specialcharacters
-      end
-      equation = node.content
-      node.subs.insert idx, :specialcharacters if idx
-      if node.style == 'asciimath'
-        if ((defined? ::AsciiMath) || ((defined? @asciimath_available) ? @asciimath_available :
-            (@asciimath_available = Helpers.require_library 'asciimath', true, :warn)))
-          # NOTE fop requires jeuclid to process raw mathml
-          equation_data = (::AsciiMath.parse equation).to_mathml 'mml:', 'xmlns:mml' => 'http://www.w3.org/1998/Math/MathML'
-        else
-          equation_data = %(<mathphrase><![CDATA[#{equation}]]></mathphrase>)
-        end
-      else
-        # unhandled math; pass source to alt and required mathphrase element; dblatex will process alt as LaTeX math
-        equation_data = %(<alt><![CDATA[#{equation}]]></alt>
-<mathphrase><![CDATA[#{equation}]]></mathphrase>)
-      end
-      if node.title?
-        %(<equation#{common_attributes node.id, node.role, node.reftext}>
-<title>#{node.title}</title>
-#{equation_data}
-</equation>)
-      else
-        # WARNING dblatex displays the <informalequation> element inline instead of block as documented (except w/ mathml)
-        %(<informalequation#{common_attributes node.id, node.role, node.reftext}>
-#{equation_data}
-</informalequation>)
-      end
-    end
+#     def stem node
+#       if (idx = node.subs.index :specialcharacters)
+#         node.subs.delete :specialcharacters
+#       end
+#       equation = node.content
+#       node.subs.insert idx, :specialcharacters if idx
+#       if node.style == 'asciimath'
+#         if ((defined? ::AsciiMath) || ((defined? @asciimath_available) ? @asciimath_available :
+#             (@asciimath_available = Helpers.require_library 'asciimath', true, :warn)))
+#           # NOTE fop requires jeuclid to process raw mathml
+#           equation_data = (::AsciiMath.parse equation).to_mathml 'mml:', 'xmlns:mml' => 'http://www.w3.org/1998/Math/MathML'
+#         else
+#           equation_data = %(<mathphrase><![CDATA[#{equation}]]></mathphrase>)
+#         end
+#       else
+#         # unhandled math; pass source to alt and required mathphrase element; dblatex will process alt as LaTeX math
+#         equation_data = %(<alt><![CDATA[#{equation}]]></alt>
+# <mathphrase><![CDATA[#{equation}]]></mathphrase>)
+#       end
+#       if node.title?
+#         %(<equation#{common_attributes node.id, node.role, node.reftext}>
+# <title>#{node.title}</title>
+# #{equation_data}
+# </equation>)
+#       else
+#         # WARNING dblatex displays the <informalequation> element inline instead of block as documented (except w/ mathml)
+#         %(<informalequation#{common_attributes node.id, node.role, node.reftext}>
+# #{equation_data}
+# </informalequation>)
+#       end
+#     end
 
     def olist node
       result = []
@@ -614,18 +614,6 @@ module Asciidoctor
     }).default = [nil, nil, true]
 
     def inline_quoted node
-      if (type = node.type) == :asciimath
-        if ((defined? ::AsciiMath) || ((defined? @asciimath_available) ? @asciimath_available :
-            (@asciimath_available = Helpers.require_library 'asciimath', true, :warn)))
-          # NOTE fop requires jeuclid to process raw mathml
-          %(<inlineequation>#{(::AsciiMath.parse node.text).to_mathml 'mml:', 'xmlns:mml' => 'http://www.w3.org/1998/Math/MathML'}</inlineequation>)
-        else
-          %(<inlineequation><mathphrase><![CDATA[#{node.text}]]></mathphrase></inlineequation>)
-        end
-      elsif type == :latexmath
-        # unhandled math; pass source to alt and required mathphrase element; dblatex will process alt as LaTeX math
-        %(<inlineequation><alt><![CDATA[#{equation = node.text}]]></alt><mathphrase><![CDATA[#{equation}]]></mathphrase></inlineequation>)
-      else
         open, close, supports_phrase = QUOTE_TAGS[type]
         text = node.text
         if (role = node.role)
@@ -639,7 +627,6 @@ module Asciidoctor
         end
 
         node.id ? %(<anchor#{common_attributes node.id, nil, text}/>#{quoted_text}) : quoted_text
-      end
     end
 
     def author_element doc, index = nil

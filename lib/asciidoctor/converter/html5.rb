@@ -618,21 +618,21 @@ Your browser does not support the audio tag.
 </div>)
     end
 
-    def stem node
-      id_attribute = node.id ? %( id="#{node.id}") : nil
-      title_element = node.title? ? %(<div class="title">#{node.title}</div>\n) : nil
-      open, close = BLOCK_MATH_DELIMITERS[node.style.to_sym]
-
-      unless ((equation = node.content).start_with? open) && (equation.end_with? close)
-        equation = %(#{open}#{equation}#{close})
-      end
-
-      %(<div#{id_attribute} class="#{(role = node.role) ? ['stemblock', role] * ' ' : 'stemblock'}">
-#{title_element}<div class="content">
-#{equation}
-</div>
-</div>)
-    end
+#     def stem node
+#       id_attribute = node.id ? %( id="#{node.id}") : nil
+#       title_element = node.title? ? %(<div class="title">#{node.title}</div>\n) : nil
+#       open, close = BLOCK_MATH_DELIMITERS[node.style.to_sym]
+#
+#       unless ((equation = node.content).start_with? open) && (equation.end_with? close)
+#         equation = %(#{open}#{equation}#{close})
+#       end
+#
+#       %(<div#{id_attribute} class="#{(role = node.role) ? ['stemblock', role] * ' ' : 'stemblock'}">
+# #{title_element}<div class="content">
+# #{equation}
+# </div>
+# </div>)
+#     end
 
     def olist node
       result = []

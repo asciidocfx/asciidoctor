@@ -370,18 +370,18 @@ T})
 
     alias :sidebar :skip_with_warning
 
-    def stem node
-      title_element = node.title? ? %(.sp
-.B #{manify node.title}
-.br) : nil
-      open, close = BLOCK_MATH_DELIMITERS[node.style.to_sym]
-
-      unless ((equation = node.content).start_with? open) && (equation.end_with? close)
-        equation = %(#{open}#{equation}#{close})
-      end
-
-      %(#{title_element}#{equation})
-    end
+#     def stem node
+#       title_element = node.title? ? %(.sp
+# .B #{manify node.title}
+# .br) : nil
+#       open, close = BLOCK_MATH_DELIMITERS[node.style.to_sym]
+#
+#       unless ((equation = node.content).start_with? open) && (equation.end_with? close)
+#         equation = %(#{open}#{equation}#{close})
+#       end
+#
+#       %(#{title_element}#{equation})
+#     end
 
     # FIXME: The reason this method is so complicated is because we are not
     # receiving empty(marked) cells when there are colspans or rowspans. This
